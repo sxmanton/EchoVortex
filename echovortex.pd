@@ -1,12 +1,8 @@
-#N canvas 139 356 1301 714 10;
-#N canvas -8 -8 1920 997 echovortex 0;
+#N canvas 221 62 1301 714 10;
+#N canvas 0 0 1916 997 echovortex 0;
 #X obj 159 62 *~ 1;
 #X obj 172 36 r ingain;
 #X obj 85 62 send~ dry;
-#X obj 42 216 delwrite~ ldelay1 120000;
-#X obj 293 213 delwrite~ rdelay1 120000;
-#X obj 76 193 delwrite~ ldelay2 120000;
-#X obj 294 188 delwrite~ rdelay2 120000;
 #X obj 236 250 receive~ dry;
 #X obj 326 251 r drylevel;
 #X obj 292 322 *~ 1;
@@ -24,7 +20,7 @@
 #X obj 3 38 r r2lfb;
 #X obj -144 -12 vd~ rdelay1;
 #X obj 142 -13 r deltoggle;
-#X obj 133 29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 133 29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X obj 47 -33 loadbang;
 #X obj -305 -68 r ldamt;
@@ -75,7 +71,7 @@
 #X obj -340 112 r l2rfb;
 #X obj 3 38 r r2lfb;
 #X obj 142 -13 r deltoggle;
-#X obj 133 29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 133 29 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj -150 32 vd~ rdelay2;
 #X obj -310 49 vd~ ldelay2;
@@ -119,7 +115,7 @@
 #X obj 308 376 *~ 0.1;
 #X obj 342 316 r outgain;
 #N canvas 1 80 1301 714 midictl 0;
-#N canvas 1 80 1033 386 sliders 1;
+#N canvas 1 80 1033 386 sliders 0;
 #X obj 42 10 ctlin 0;
 #X obj 43 43 / 127;
 #X floatatom 43 100 5 0 0 0 - - -;
@@ -193,7 +189,7 @@
 #X connect 38 0 29 0;
 #X connect 39 0 31 0;
 #X restore 21 -14 pd sliders;
-#N canvas 388 161 1301 714 knobs 1;
+#N canvas 388 161 1301 714 knobs 0;
 #X obj 43 43 / 127;
 #X obj 137 44 / 127;
 #X obj 251 44 / 127;
@@ -359,7 +355,7 @@
 #X connect 79 0 52 0;
 #X connect 79 0 38 0;
 #X restore 103 -9 pd knobs;
-#N canvas 1 80 1301 714 buttons 1;
+#N canvas 1 80 1301 714 buttons 0;
 #X obj 24 27 ctlin 43;
 #X obj 97 30 r ldamt;
 #X obj 153 31 r rdamt;
@@ -544,32 +540,36 @@
 #X msg 211 411 minvel 120;
 #X obj 124 286 receive~ wetl2;
 #X obj 173 313 receive~ wetr2;
-#X connect 0 0 3 0;
-#X connect 0 0 4 0;
-#X connect 0 0 5 0;
-#X connect 0 0 6 0;
+#X obj 77 188 delwrite~ ldelay2 1.2e+006;
+#X obj 42 216 delwrite~ ldelay1 1.2e+006;
+#X obj 294 188 delwrite~ rdelay2 1.2e+006;
+#X obj 293 213 delwrite~ rdelay1 1.2e+006;
+#X connect 0 0 22 0;
+#X connect 0 0 23 0;
+#X connect 0 0 24 0;
+#X connect 0 0 25 0;
 #X connect 1 0 0 1;
-#X connect 7 0 9 0;
-#X connect 8 0 9 1;
-#X connect 9 0 14 0;
-#X connect 10 0 0 0;
-#X connect 10 0 2 0;
-#X connect 12 0 3 0;
-#X connect 12 1 4 0;
-#X connect 13 0 5 0;
-#X connect 13 1 6 0;
-#X connect 14 0 11 0;
-#X connect 14 0 11 1;
-#X connect 15 0 14 1;
-#X connect 15 0 19 1;
-#X connect 15 0 20 1;
-#X connect 17 0 19 0;
-#X connect 18 0 20 0;
-#X connect 19 0 11 0;
-#X connect 20 0 11 1;
-#X connect 21 0 22 0;
-#X connect 24 0 19 0;
-#X connect 25 0 19 0;
+#X connect 3 0 5 0;
+#X connect 4 0 5 1;
+#X connect 5 0 10 0;
+#X connect 6 0 0 0;
+#X connect 6 0 2 0;
+#X connect 8 0 23 0;
+#X connect 8 1 25 0;
+#X connect 9 0 22 0;
+#X connect 9 1 24 0;
+#X connect 10 0 7 0;
+#X connect 10 0 7 1;
+#X connect 11 0 10 1;
+#X connect 11 0 15 1;
+#X connect 11 0 16 1;
+#X connect 13 0 15 0;
+#X connect 14 0 16 0;
+#X connect 15 0 7 0;
+#X connect 16 0 7 1;
+#X connect 17 0 18 0;
+#X connect 20 0 15 0;
+#X connect 21 0 15 0;
 #X restore 7 329 pd echovortex;
 #X obj 17 46 vsl 15 128 0 127 0 0 ingain empty empty 0 -9 0 10 -262144
 -1 -1 0 1;
@@ -590,7 +590,6 @@
 -1 -1 0 1;
 #X obj 173 45 vsl 15 128 0 127 0 0 l2rfb empty empty 0 -9 0 10 -262144
 -1 -1 0 1;
-#X text 198 7;
 #X text 169 22 L2R;
 #X obj 209 45 vsl 15 128 0 127 0 0 r2lfb empty empty 0 -9 0 10 -262144
 -1 -1 0 1;
@@ -599,7 +598,7 @@
 #X text 205 22 R2L;
 #X text 245 21 R;
 #X obj 14 199 hsl 256 15 0 127 0 0 base empty empty -2 -8 0 10 -262144
--1 -1 13300 1;
+-1 -1 0 1;
 #X obj 14 249 bng 15 250 50 0 div10 empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj 40 249 bng 15 250 50 0 div3 empty empty 17 7 0 10 -262144 -1
@@ -659,3 +658,4 @@
 #X obj 351 269 bng 15 250 50 0 bothdiv3 empty empty 17 7 0 10 -262144
 -1 -1;
 #X text 284 91 HOLD TO MUTE WET;
+#X text 244 3;
